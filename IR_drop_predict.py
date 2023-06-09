@@ -48,10 +48,10 @@ class IRDropPrediction():
         features = torch.stack(features).type(torch.float32)
         return features
 
-    def find_drc_coord(self,tensor, threshold):
-        p = torch.where(tensor>=threshold,1,0)
-        indices = torch.where(p == 1)
-        return np.array(list((indices[1].tolist(), indices[0].tolist()))).T
+    def find_irdrop_coord_and_value(self,tensor, threshold):
+        indices = torch.where(tensor >= threshold)
+        values = self.std(tensor[indices])
+        return np.array(list((indices[1].tolist(), indices[0].tolist(),values.tolist()))).T
 
     def Prediction(self, irdrop_threshold):
         self.irdrop_threshold = irdrop_threshold
@@ -62,17 +62,19 @@ class IRDropPrediction():
         if self.device == 'cpu':
             self.pred = self.model(self.feature)
             self.pred = self.model.sigmoid(self.pred)
-        self.pred_coord = self.find_drc_coord(self.pred[0,0], threshold=irdrop_threshold)
-        self.pred_coord = pd.DataFrame(self.pred_coord,columns=['x','y'])
+        self.pred_coord = self.find_irdrop_coord_and_value(self.pred[0,0], threshold=irdrop_threshold)
+        self.pred_coord = pd.DataFrame(self.pred_coord,columns=['x','y','congestion'])
         return self.pred, self.pred_coord
 
     def ShowFig(self,fig_save_path):
         if fig_save_path is None:
             raise ValueError("Figure save path is not specified clear.")
-        plt.imshow(self.pred[0, 0].detach().cpu().numpy())
+        plt.imshow(np.zeros(shape=self.pred[0,0].shape))
+        # plt.imshow(self.pred[0, 0].detach().cpu().numpy())
         plt.title(f"IR Drop Prediction > {self.irdrop_threshold}")
-        pts = plt.scatter(x=self.pred_coord['x'],y=self.pred_coord['y'],c='r',s=5)
-        plt.legend([pts],["IR Drop"])
+        pts = plt.scatter(x=self.pred_coord['x'],y=self.pred_coord['y'],c=self.pred_coord['congestion'],cmap='jet',s=5)
+        # plt.legend([pts],["IR Drop"])
+        plt.colorbar()
         plt.savefig(f"{fig_save_path}/IRDrop_{self.irdrop_threshold}.png")
         plt.show()
 
@@ -88,7 +90,7 @@ def parse_args():
     parser.add_argument("--fig_save_path", default="./save_img", type=str, help='The path you want to save fingue')
     parser.add_argument("--weight_path", default="./model_weight/irdrop_weights.pt", type=str, help='The path of the model weight')
     parser.add_argument("--output_path", default="./output", type=str, help='The path of the model weight')
-    parser.add_argument("--irdrop_threshold", default=0.8, type=float, help='irdrop_threshold [0,1]')
+    parser.add_argument("--irdrop_threshold", default=0.1, type=float, help='irdrop_threshold [0,1]')
     parser.add_argument("--device", default='cpu', type=str, help='If you have gpu type "cuda" will be faster!!')
     args = parser.parse_args()
     return args
