@@ -35,11 +35,11 @@ python predict.py
 --irdrop_threshold: irdrop_threshold [0,1] <br>
 --device: If you want to use gpu type "cuda" <br>
 ## Predict result
-1. Tune your own irdrop_threshold, the defalt is 0.8 as shown in following figure.
+1. Tune your own irdrop_threshold, the defalt is 0.1 as shown in following figure.
 2. The output coordinate csv file and image array npy file are in the ./output file.
 3. The model predict cost time is **1.49 ~ 2.2 sec**.
 
-![image](https://github.com/ycchen218/EDA-IRDrop-Prediction/blob/master/save_img/IRDrop_0.8.png)
+![image](https://github.com/ycchen218/EDA-IRdrop-Prediction/blob/master/git_image/predict.png)
 ## Compare with ground truth
 ![image](https://github.com/ycchen218/EDA-IRDrop-Prediction/blob/master/git_image/test_compare.png)
 ## Cross validation while evalulate the model
