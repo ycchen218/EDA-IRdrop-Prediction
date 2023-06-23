@@ -1,7 +1,7 @@
 # EDA IR Drop Prediction
 ## Update
 - 2023/6/24<br>
-  Add the train.py file. <br>
+  Add the IR_drop_train.py file. <br>
   Delete model weight<br>
   Get model weight at [GoogleDrive](https://drive.google.com/drive/folders/1ZscqJsUbKuphnyAL7LrQXB62dC6uc9fs?usp=sharing)
 ## Introduce
@@ -28,6 +28,16 @@ Additionally, for one prediction process only costs about 2 seconds.
 For more feature information V. A. Chhabria *et al.* **[1]** have discribe the detail of the feature extraction process.
 
 ![image](https://github.com/ycchen218/EDA-IRDrop-Prediction/blob/master/git_image/model_overview.png)
+## Train
+```markdown
+python IR_drop_train.py
+```
+--root_path: The path of the data file <br>
+--batch_size: The batch size figure <br>
+--num_epochs: The training epochs <br>
+--learning_rate: learning rate [0,1] <br>
+--weight_path: The path to save the model weight <br>
+--fig_path: The path of the figure file <br>
 ## Predict
 ```markdown
 python predict.py
