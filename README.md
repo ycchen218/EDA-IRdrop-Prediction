@@ -1,4 +1,9 @@
 # EDA IR Drop Prediction
+## Update
+- 2023/6/24<br>
+  Add the train.py file. <br>
+  Delete model weight<br>
+  Get model weight at [GoogleDrive](https://drive.google.com/drive/folders/1ZscqJsUbKuphnyAL7LrQXB62dC6uc9fs?usp=sharing)
 ## Introduce
 IR drop analysis is an essential step for IC design, evaluating the power integrity of a chip power delivery network.
 This is a deep-learning-based EDA tool for predicting the IR Drop heatmap, I achieve high precision and accuracy by inputting the power features. 
@@ -23,7 +28,6 @@ Additionally, for one prediction process only costs about 2 seconds.
 For more feature information V. A. Chhabria *et al.* **[1]** have discribe the detail of the feature extraction process.
 
 ![image](https://github.com/ycchen218/EDA-IRDrop-Prediction/blob/master/git_image/model_overview.png)
-
 ## Predict
 ```markdown
 python predict.py
