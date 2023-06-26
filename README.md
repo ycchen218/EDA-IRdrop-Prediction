@@ -40,7 +40,7 @@ python IR_drop_train.py
 --fig_path: The path of the figure file <br>
 ## Predict
 ```markdown
-python predict.py
+python IR_drop_predict.py
 ```
 --data_path: The path of the data file <br>
 --fig_save_path: The path you want to save figure <br>
