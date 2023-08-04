@@ -1,5 +1,7 @@
 # EDA IR Drop Prediction
 ## Update
+- 2023/08/04<br>
+  Add the model overview and brief description.
 - 2023/6/24<br>
   Add the IR_drop_train.py file. <br>
   Delete model weight<br>
@@ -25,9 +27,13 @@ Additionally, for one prediction process only costs about 2 seconds.
 | $p_{all}$ | $p_{i}+p_{s}+p_{sac}$     |
 |$p_{t}$    |The power of an instance at each time step | 
 
-For more feature information V. A. Chhabria *et al.* **[1]** have discribe the detail of the feature extraction process.
-
-![image](https://github.com/ycchen218/EDA-IRDrop-Prediction/blob/master/git_image/model_overview.png)
+For more feature information V. A. Chhabria *et al.* **[1]** have discribe the detail of the feature extraction process.<br>
+The CE-FPN model is proposed by Y. Luo *et al.* **[2]**.
+![image](https://github.com/ycchen218/EDA-IRdrop-Prediction/blob/master/git_image/IRdrop_model.png)
+1. The purple CNN block is the CoordConv.
+2. SSF is the Sub-pixel Skip Fusion.
+3. SCE block is the Sub-pixel Context Enhancement.
+4. CAG block is the Channel Attention Guided Module.
 ## Train
 ```markdown
 python IR_drop_train.py
@@ -67,4 +73,5 @@ by the same metrics code as [CircuitNet](https://github.com/circuitnet/CircuitNe
 ## Reference
 ```markdown
 [1] V. A. Chhabria, Y. Zhang, H. Ren, B. Keller, and S. S. Sapatnekar, "Mavirec: mL-aided vectored ir-drop estimation and classification," *Design, Automation & Test in Europe Conference & Exhibition*, pp. 1825-1828, 2021.
+[2] Y. Luo, X. Cao, J. Zhang, X. Cao, F. Guo, H. Shen, T. Wang, and Q. Feng, "Ce-fpn: enhancing channel information for object detection," ArXiv Computer Vision and Pattern Recognition, pp. 1-9, 2021.
 ```
